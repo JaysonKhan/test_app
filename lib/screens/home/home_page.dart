@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metaballs/metaballs.dart';
+// import 'package:metaballs/metaballs.dart';
 import 'package:neumorphic_button/neumorphic_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:test_app/common/constants.dart';
@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Metaballs(
+      body: /*Metaballs(
         glowRadius: 1,
         glowIntensity: 0.6,
         maxBallRadius: 50,
@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
           Color.fromARGB(255, 120, 217, 255),
           Color.fromARGB(255, 255, 234, 214),
         ], begin: Alignment.bottomRight, end: Alignment.topLeft),
-        child: Center(
+        child:*/ Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          // ),
         ),
       ),
     );

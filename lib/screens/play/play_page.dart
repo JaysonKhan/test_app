@@ -1,7 +1,7 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:metaballs/metaballs.dart';
+// import 'package:metaballs/metaballs.dart';
 import 'package:neumorphic_button/neumorphic_button.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import 'package:test_app/common/constants.dart';
@@ -55,14 +55,14 @@ class _PlayPageState extends State<PlayPage> with SingleTickerProviderStateMixin
                   height: 3
               )),
             ),
-            body: Metaballs(
+            body: /*Metaballs(
               glowRadius: 1,
               glowIntensity: 0.6,
               maxBallRadius: 55,
               minBallRadius: 15,
               metaballs: 50,
               gradient: state.gameStopped?colorListNormal:state.valueAnimator<=10?colorListGreen:state.valueAnimator<=20?colorListYellow:colorListRed,
-              child: Padding(
+              child: */Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Center(
                   child: !state.gameStopped?Column(
@@ -326,7 +326,7 @@ class _PlayPageState extends State<PlayPage> with SingleTickerProviderStateMixin
                         ],
                       )
                     ],
-                  ),
+                  // ),
                 ),
               ),
             ),

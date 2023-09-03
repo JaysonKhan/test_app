@@ -1,6 +1,6 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-import 'package:metaballs/metaballs.dart';
+// import 'package:metaballs/metaballs.dart';
 import 'package:test_app/common/constants.dart';
 
 class InfoPage extends StatelessWidget {
@@ -14,14 +14,14 @@ class InfoPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: gameBlue1.withOpacity(0.3),
         ),
-        body: Metaballs(
+        body: /*Metaballs(
             glowRadius: 1,
             glowIntensity: 0.6,
             maxBallRadius: 45,
             minBallRadius: 15,
             metaballs: 50,
             gradient: colorListInfo,
-            child: Padding(
+            child: */Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Center(
                 child: Column(
@@ -149,7 +149,7 @@ class InfoPage extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
+                // ),
               ),
             )));
   }
