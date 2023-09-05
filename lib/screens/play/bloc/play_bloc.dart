@@ -29,7 +29,6 @@ class PlayBloc extends Bloc<PlayEvent, PlayState> {
               gameStopped: false,
             ),
           );
-          print("QUESTION: ${futureTest.question} ANSWER IS ${futureTest.answers4[futureTest.correctPosition]}");
           oldQuestion = futureTest;
           futureTest = giveQuestion(event.level);
           break;
@@ -39,8 +38,6 @@ class PlayBloc extends Bloc<PlayEvent, PlayState> {
               (event.isTrue
                   ? oldQuestion.questionLevel
                   : -(oldQuestion.questionLevel / 2).round());
-
-          print("QUESTION: ${futureTest.question} ANSWER IS ${futureTest.answers4[futureTest.correctPosition]}");
           emit(
             state.copyWith(
               score:
@@ -77,8 +74,6 @@ class PlayBloc extends Bloc<PlayEvent, PlayState> {
           break;
       }
       while (state.valueAnimator < 30 && !restartTimer && !isClosed) {
-        print(
-            "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV ${state.valueAnimator}");
         await Future.delayed(const Duration(seconds: 1)).then((value) =>
             emit(state.copyWith(valueAnimator: state.valueAnimator + 1.0)));
       }

@@ -13,7 +13,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   page_transition: ^2.0.9
   neumorphic_button: ^0.0.1+2
-  metaballs: ^1.5.0
   confetti: ^0.7.0
   blurrycontainer: ^1.0.2
   get_it: ^7.6.0

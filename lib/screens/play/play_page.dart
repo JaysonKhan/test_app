@@ -1,8 +1,8 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:metaballs/metaballs.dart';
 import 'package:neumorphic_button/neumorphic_button.dart';
+import 'package:particles_fly/particles_fly.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import 'package:test_app/common/constants.dart';
 import 'package:test_app/common/utils.dart';
@@ -48,7 +48,6 @@ class _PlayPageState extends State<PlayPage>
         builder: (context, state) {
           valueNotifier.value = state.valueAnimator;
           return Scaffold(
-            extendBodyBehindAppBar: true,
             appBar: AppBar(
               backgroundColor: gameBlue1.withOpacity(0.5),
               centerTitle: true,
@@ -60,27 +59,22 @@ class _PlayPageState extends State<PlayPage>
                       color: gameGray,
                       height: 3)),
             ),
-            body: Metaballs(
-              glowRadius: 1,
-              glowIntensity: 0.6,
-              maxBallRadius: 55,
-              minBallRadius: 15,
-              metaballs: 50,
-              gradient: state.gameStopped
-                  ? colorListNormal
-                  : state.valueAnimator <= 10
-                      ? colorListGreen
-                      : state.valueAnimator <= 20
-                          ? colorListYellow
-                          : colorListRed,
-              child: Padding(
+            body: Stack(
+              alignment: Alignment.center,
+              children: [
+                ParticlesFly(
+                  height: size.height,
+                  width: size.width,
+                  connectDots: true,
+                  numberOfParticles: 20,
+                ),
+                Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Center(
                   child: !state.gameStopped
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            SizedBox(height: AppBar().preferredSize.height),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -110,7 +104,7 @@ class _PlayPageState extends State<PlayPage>
                                   child: BlurryContainer(
                                     height: size.width / 1.5,
                                     width: size.width / 1.5,
-                                    blur: 20,
+                                    blur: 2,
                                     borderRadius:
                                         BorderRadius.circular(size.width / 2),
                                     child: const Text(""),
@@ -259,7 +253,6 @@ class _PlayPageState extends State<PlayPage>
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            SizedBox(height: AppBar().preferredSize.height),
                             SimpleCircularProgressBar(
                               backColor: gameGray,
                               size: size.width / 1.5,
@@ -274,7 +267,7 @@ class _PlayPageState extends State<PlayPage>
                               mergeMode: true,
                               onGetText: (double value) {
                                 return Text(
-                                  "MATH IQ:\n ${120 * (state.correctCount - state.incorrectCount / 1.5) ~/ 20}",
+                                  "MATH IQ:\n ${120 * (state.correctCount - state.incorrectCount / 1.5) ~/ (40/(1+widget.level))}",
                                   style: TextStyle(
                                       fontFamily: "GameFamily",
                                       fontSize: 33,
@@ -313,19 +306,18 @@ class _PlayPageState extends State<PlayPage>
                                   backgroundColor: Colors.grey.shade300,
                                   topLeftShadowBlurRadius: 15,
                                   topLeftShadowSpreadRadius: 1,
-                                  topLeftShadowColor:
-                                      gameBlue1.withOpacity(0.3),
+                                  topLeftShadowColor: gameBlue1.withOpacity(0.3),
                                   bottomRightShadowColor:
                                       gameBlue2.withOpacity(0.3),
                                   height: size.width * 0.2,
                                   bottomRightOffset: const Offset(4, 4),
                                   topLeftOffset: const Offset(-4, -4),
-                                  width: size.width * 0.35,
+                                  width: size.width * 0.4,
                                   child: Center(
                                       child: Text("  HOME  ",
                                           style: TextStyle(
                                               fontFamily: "GameFamily",
-                                              fontSize: 18,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.bold,
                                               color: gameGreen))),
                                 ),
@@ -340,19 +332,18 @@ class _PlayPageState extends State<PlayPage>
                                   backgroundColor: Colors.grey.shade300,
                                   topLeftShadowBlurRadius: 15,
                                   topLeftShadowSpreadRadius: 1,
-                                  topLeftShadowColor:
-                                      gameBlue1.withOpacity(0.3),
+                                  topLeftShadowColor: gameBlue1.withOpacity(0.3),
                                   bottomRightShadowColor:
                                       gameBlue2.withOpacity(0.3),
                                   height: size.width * 0.2,
                                   bottomRightOffset: const Offset(4, 4),
                                   topLeftOffset: const Offset(-4, -4),
-                                  width: size.width * 0.35,
+                                  width: size.width * 0.4,
                                   child: Center(
                                       child: Text("  RESTART  ",
                                           style: TextStyle(
                                               fontFamily: "GameFamily",
-                                              fontSize: 18,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.bold,
                                               color: gameGreen))),
                                 ),
@@ -361,7 +352,7 @@ class _PlayPageState extends State<PlayPage>
                           ],
                         ),
                 ),
-              ),
+              ),]
             ),
           );
         },

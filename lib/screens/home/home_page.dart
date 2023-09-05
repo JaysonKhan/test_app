@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:metaballs/metaballs.dart';
 import 'package:neumorphic_button/neumorphic_button.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:particles_fly/particles_fly.dart';
 import 'package:test_app/common/constants.dart';
 import 'package:test_app/screens/info/info_page.dart';
 import 'package:test_app/screens/play/play_page.dart';
@@ -15,18 +15,19 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Metaballs(
-        glowRadius: 1,
-        glowIntensity: 0.6,
-        maxBallRadius: 50,
-        minBallRadius: 20,
-        metaballs: 40,
-        gradient: const LinearGradient(colors: [
-          Color.fromARGB(255, 120, 217, 255),
-          Color.fromARGB(255, 255, 234, 214),
-        ], begin: Alignment.bottomRight, end: Alignment.topLeft),
-        child: Center(
-          child: Column(
+      body: Stack(
+        alignment: Alignment.center,
+        children:[
+          ParticlesFly(
+            height: size.height,
+            width: size.width,
+            connectDots: true,
+            numberOfParticles: 20,
+            isRandomColor: true,
+            isRandSize: true,
+            lineStrokeWidth: 1,
+          ),
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               NeumorphicButton(
@@ -34,7 +35,7 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     PageTransition(
-                        child: PlayPage(level:0), type: PageTransitionType.fade),
+                        child: PlayPage(level: 0), type: PageTransitionType.fade),
                   );
                 },
                 borderRadius: 12,
@@ -54,9 +55,7 @@ class HomePage extends StatelessWidget {
                   child: Text(
                     "Math Level 1",
                     style: TextStyle(
-                        fontFamily: "GameFamily",
-                        fontSize: 23,
-                        color: gameBlue2),
+                        fontFamily: "GameFamily", fontSize: 23, color: gameBlue2),
                   ),
                 ),
               ),
@@ -65,7 +64,7 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     PageTransition(
-                        child: PlayPage(level: 1,), type: PageTransitionType.fade),
+                        child: PlayPage(level: 1), type: PageTransitionType.fade),
                   );
                 },
                 borderRadius: 12,
@@ -83,11 +82,9 @@ class HomePage extends StatelessWidget {
                 topLeftOffset: const Offset(-4, -4),
                 child: Center(
                   child: Text(
-                    "Play Math",
+                    "Math Level 2",
                     style: TextStyle(
-                        fontFamily: "GameFamily",
-                        fontSize: 23,
-                        color: gameBlue2),
+                        fontFamily: "GameFamily", fontSize: 23, color: gameBlue2),
                   ),
                 ),
               ),
@@ -96,7 +93,7 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     PageTransition(
-                        child: PlayPage(level: 2,), type: PageTransitionType.fade),
+                        child: PlayPage(level: 2), type: PageTransitionType.fade),
                   );
                 },
                 borderRadius: 12,
@@ -114,11 +111,9 @@ class HomePage extends StatelessWidget {
                 topLeftOffset: const Offset(-4, -4),
                 child: Center(
                   child: Text(
-                    "Play Math",
+                    "Math Level 3",
                     style: TextStyle(
-                        fontFamily: "GameFamily",
-                        fontSize: 23,
-                        color: gameBlue2),
+                        fontFamily: "GameFamily", fontSize: 23, color: gameBlue2),
                   ),
                 ),
               ),
@@ -127,7 +122,7 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     PageTransition(
-                        child: PlayPage(level: 3,), type: PageTransitionType.fade),
+                        child: PlayPage(level: 3), type: PageTransitionType.fade),
                   );
                 },
                 borderRadius: 12,
@@ -145,11 +140,9 @@ class HomePage extends StatelessWidget {
                 topLeftOffset: const Offset(-4, -4),
                 child: Center(
                   child: Text(
-                    "Play Math",
+                    "Math Level 4",
                     style: TextStyle(
-                        fontFamily: "GameFamily",
-                        fontSize: 23,
-                        color: gameBlue2),
+                        fontFamily: "GameFamily", fontSize: 23, color: gameBlue2),
                   ),
                 ),
               ),
@@ -178,15 +171,12 @@ class HomePage extends StatelessWidget {
                   child: Text(
                     "About Game",
                     style: TextStyle(
-                        fontFamily: "GameFamily",
-                        fontSize: 23,
-                        color: gameBlue2),
+                        fontFamily: "GameFamily", fontSize: 23, color: gameBlue2),
                   ),
                 ),
               ),
             ],
-          ),
-        ),
+          ),],
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-import 'package:metaballs/metaballs.dart';
+import 'package:particles_fly/particles_fly.dart';
 import 'package:test_app/common/constants.dart';
 
 class InfoPage extends StatelessWidget {
@@ -10,19 +10,21 @@ class InfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      extendBodyBehindAppBar: true,
       backgroundColor: gameGray,
       appBar: AppBar(
         backgroundColor: gameBlue1.withOpacity(0.3),
       ),
-      body: Metaballs(
-        glowRadius: 1,
-        glowIntensity: 0.6,
-        maxBallRadius: 45,
-        minBallRadius: 15,
-        metaballs: 50,
-        gradient: colorListInfo,
-        child: Padding(
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          ParticlesFly(
+            height: size.height,
+            width: size.width,
+            connectDots: true,
+            numberOfParticles: 100,
+            isRandomColor: true,
+          ),
+          Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Center(
             child: Column(
@@ -156,7 +158,7 @@ class InfoPage extends StatelessWidget {
               ],
             ),
           ),
-        ),
+        ),]
       ),
     );
   }
