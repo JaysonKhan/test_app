@@ -13,48 +13,55 @@ class TestModel {
     required this.questionLevel,
   });
 
-  factory TestModel.create(int level) {
-    late int a, b, c, correct;
-    late String operetor1, operetor2, question;
+  factory TestModel.createLevel1() {
+    late int a, b,correct;
+    late String operator, question;
     late List<String> answers = [];
-    switch (level) {
-      case 0:
-        a = Random().nextInt(190) + 10;
-        b = Random().nextInt(45) + 10;
-        switch (Random().nextInt(2)) {
-          case 0:
-            operetor1 = "+";
-            correct = a + b;
-            break;
-          case 1:
-            operetor1 = "-";
-            correct = a - b;
-            break;
+     a = Random().nextInt(190) + 10;
+     b = Random().nextInt(45) + 10;
+     switch (Random().nextInt(2)) {
+       case 0:
+          operator = "+";
+          correct = a + b;
+          break;
+       case 1:
+          operator = "-";
+          correct = a - b;
+          break;
+     }
+     question = "$a $operator $b =?";
+     for (int i = 0; i < 4; i++) {
+        int temp = Random().nextInt(correct<0?-1*correct:correct) + (correct / 2).round();
+        while (temp == correct) {
+          temp = Random().nextInt(correct<0?-1*correct:correct) + (correct / 2).round();
         }
-        question = "$a $operetor1 $b =?";
-        for (int i = 0; i < 4; i++) {
-          int temp = Random().nextInt(correct<0?-1*correct:correct) + (correct / 2).round();
-          while (temp == correct) {
-            temp = Random().nextInt(correct<0?-1*correct:correct) + (correct / 2).round();
-          }
-          answers.add("$temp");
-        }
-        answers.add("$correct");
-        break;
-      case 1:
+        answers.add("$temp");
+     }
+     answers.add("$correct");
+     answers.shuffle();
+     return TestModel(
+        question: question,
+        answers4: answers,
+        correctPosition: answers.indexOf("$correct"),
+        questionLevel: 1);
+  }
+  factory TestModel.createLevel2() {
+    late int a, b, correct;
+    late String operator, question;
+    late List<String> answers = [];
         a = Random().nextInt(200) + 10;
         b = Random().nextInt(50) + 10;
         switch (Random().nextInt(2)) {
           case 0:
-            operetor1 = "+";
+            operator = "+";
             correct = a + b;
             break;
           case 1:
-            operetor1 = "*";
+            operator = "*";
             correct = a * b;
             break;
         }
-        question = "$a $operetor1 $b =?";
+        question = "$a $operator $b =?";
         for (int i = 0; i < 3; i++) {
           int temp = Random().nextInt(correct<0?-1*correct:correct) + (correct / 2).round();
           while (temp == correct) {
@@ -63,34 +70,43 @@ class TestModel {
           answers.add("$temp");
         }
         answers.add("$correct");
-        break;
-      case 2:
+    answers.shuffle();
+    return TestModel(
+        question: question,
+        answers4: answers,
+        correctPosition: answers.indexOf("$correct"),
+        questionLevel: 2);
+  }
+  factory TestModel.createLevel3() {
+    late int a, b, c, correct;
+    late String operator1, operator2, question;
+    late List<String> answers = [];
         a = Random().nextInt(300) + 10;
         b = Random().nextInt(90) + 10;
         c = Random().nextInt(90) + 10;
         switch (Random().nextInt(4)) {
           case 0:
-            operetor1 = "+";
-            operetor2 = "-";
+            operator1 = "+";
+            operator2 = "-";
             correct = a + b - c;
             break;
           case 1:
-            operetor1 = "-";
-            operetor2 = "+";
+            operator1 = "-";
+            operator2 = "+";
             correct = a - b + c;
             break;
           case 2:
-            operetor1 = "-";
-            operetor2 = "-";
+            operator1 = "-";
+            operator2 = "-";
             correct = a - b - c;
             break;
           case 3:
-            operetor1 = "+";
-            operetor2 = "+";
+            operator1 = "+";
+            operator2 = "+";
             correct = a + b + c;
             break;
         }
-        question = "$a $operetor1 $b $operetor2 $c =?";
+        question = "$a $operator1 $b $operator2 $c =?";
         for (int i = 0; i < 3; i++) {
           int temp = Random().nextInt(correct<0?-1*correct:correct) + (correct / 2).round();
           while (temp == correct) {
@@ -99,8 +115,17 @@ class TestModel {
           answers.add("$temp");
         }
         answers.add("$correct");
-        break;
-      case 3:
+    answers.shuffle();
+    return TestModel(
+        question: question,
+        answers4: answers,
+        correctPosition: answers.indexOf("$correct"),
+        questionLevel: 3);
+  }
+  factory TestModel.createLevel4() {
+    late int a, b, c, correct;
+    late String operator1, operator2, question;
+    late List<String> answers = [];
         a = Random().nextInt(300) + 10;
         b = Random().nextInt(20) + 1;
         c = Random().nextInt(30) + 10;
@@ -110,22 +135,22 @@ class TestModel {
         }
         switch (Random().nextInt(3)) {
           case 0:
-            operetor1 = "/";
-            operetor2 = "+";
+            operator1 = "/";
+            operator2 = "+";
             correct = a ~/ b + c;
             break;
           case 1:
-            operetor1 = "/";
-            operetor2 = "-";
+            operator1 = "/";
+            operator2 = "-";
             correct = a ~/ b - c;
             break;
           case 2:
-            operetor1 = "*";
-            operetor2 = "-";
+            operator1 = "*";
+            operator2 = "-";
             correct = a * b - c;
             break;
         }
-        question = "$a $operetor1 $b $operetor2 $c =?";
+        question = "$a $operator1 $b $operator2 $c =?";
         for (int i = 0; i < 3; i++) {
           int temp = Random().nextInt(correct<0?-1*correct:correct) + (correct / 2).round();
           while (temp == correct) {
@@ -134,13 +159,11 @@ class TestModel {
           answers.add("$temp");
         }
         answers.add("$correct");
-        break;
-    }
     answers.shuffle();
     return TestModel(
         question: question,
         answers4: answers,
         correctPosition: answers.indexOf("$correct"),
-        questionLevel: level);
+        questionLevel: 4);
   }
 }

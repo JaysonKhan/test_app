@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:test_app/model/mock/mock_data.dart';
 import 'package:test_app/model/test_model.dart';
 
 part 'play_event.dart';
@@ -12,7 +9,7 @@ part 'play_state.dart';
 part 'play_bloc.freezed.dart';
 
 class PlayBloc extends Bloc<PlayEvent, PlayState> {
-  List<TestModel> list = mockQuestions;
+  List<TestModel> list = [];
   int indexQuestion = 0;
   late TestModel futureTest;
   late TestModel oldQuestion;
@@ -22,7 +19,7 @@ class PlayBloc extends Bloc<PlayEvent, PlayState> {
     on<PlayEvent>((event, emit) async {
       switch (event) {
         case _Initial():
-          futureTest = list[indexQuestion];
+          futureTest = giveQuestion(event.level);
           emit(
             state.copyWith(
               question: futureTest.question,
@@ -34,7 +31,7 @@ class PlayBloc extends Bloc<PlayEvent, PlayState> {
           );
           print("QUESTION: ${futureTest.question} ANSWER IS ${futureTest.answers4[futureTest.correctPosition]}");
           oldQuestion = futureTest;
-          futureTest = giveQuestion();
+          futureTest = giveQuestion(event.level);
           break;
         case _NextQuestion():
           restartTimer = true;
@@ -57,16 +54,15 @@ class PlayBloc extends Bloc<PlayEvent, PlayState> {
             ),
           );
           oldQuestion = futureTest;
-          futureTest = giveQuestion();
+          futureTest = giveQuestion(event.level);
           break;
         case _Stop():
           restartTimer = true;
           emit(state.copyWith(gameStopped: true));
           break;
         case _Restart():
-          list = list..shuffle();
           indexQuestion = 0;
-          futureTest = list[indexQuestion];
+          futureTest = giveQuestion(event.level);
           emit(state.copyWith(
             correctCount: 0,
             incorrectCount: 0,
@@ -94,12 +90,21 @@ class PlayBloc extends Bloc<PlayEvent, PlayState> {
     });
   }
 
-  TestModel giveQuestion() {
+  TestModel giveQuestion(int level) {
     try{
-      list.add(TestModel.create(Random().nextInt(4)));
+      switch(level){
+        case 0:
+          list.add(TestModel.createLevel1()); break;
+        case 1:
+          list.add(TestModel.createLevel2()); break;
+        case 2:
+          list.add(TestModel.createLevel3()); break;
+        case 3:
+          list.add(TestModel.createLevel4()); break;
+      }
     }catch(e){
       print("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOORRRRRRRR: $e");
     }
-    return list[++indexQuestion];
+    return list[indexQuestion++];
   }
 }

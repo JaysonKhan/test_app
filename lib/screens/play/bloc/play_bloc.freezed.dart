@@ -18,27 +18,29 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PlayEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(double currentTimer, bool isTrue)
+    required TResult Function(int level) initial,
+    required TResult Function(double currentTimer, bool isTrue, int level)
         giveNextQuestion,
     required TResult Function() stop,
-    required TResult Function() restart,
+    required TResult Function(int level) restart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(double currentTimer, bool isTrue)? giveNextQuestion,
+    TResult? Function(int level)? initial,
+    TResult? Function(double currentTimer, bool isTrue, int level)?
+        giveNextQuestion,
     TResult? Function()? stop,
-    TResult? Function()? restart,
+    TResult? Function(int level)? restart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(double currentTimer, bool isTrue)? giveNextQuestion,
+    TResult Function(int level)? initial,
+    TResult Function(double currentTimer, bool isTrue, int level)?
+        giveNextQuestion,
     TResult Function()? stop,
-    TResult Function()? restart,
+    TResult Function(int level)? restart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -91,6 +93,8 @@ abstract class _$$_InitialCopyWith<$Res> {
   factory _$$_InitialCopyWith(
           _$_Initial value, $Res Function(_$_Initial) then) =
       __$$_InitialCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int level});
 }
 
 /// @nodoc
@@ -99,61 +103,87 @@ class __$$_InitialCopyWithImpl<$Res>
     implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? level = null,
+  }) {
+    return _then(_$_Initial(
+      null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Initial implements _Initial {
-  const _$_Initial();
+  const _$_Initial(this.level);
+
+  @override
+  final int level;
 
   @override
   String toString() {
-    return 'PlayEvent.initial()';
+    return 'PlayEvent.initial(level: $level)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType &&
+            other is _$_Initial &&
+            (identical(other.level, level) || other.level == level));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, level);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(double currentTimer, bool isTrue)
+    required TResult Function(int level) initial,
+    required TResult Function(double currentTimer, bool isTrue, int level)
         giveNextQuestion,
     required TResult Function() stop,
-    required TResult Function() restart,
+    required TResult Function(int level) restart,
   }) {
-    return initial();
+    return initial(level);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(double currentTimer, bool isTrue)? giveNextQuestion,
+    TResult? Function(int level)? initial,
+    TResult? Function(double currentTimer, bool isTrue, int level)?
+        giveNextQuestion,
     TResult? Function()? stop,
-    TResult? Function()? restart,
+    TResult? Function(int level)? restart,
   }) {
-    return initial?.call();
+    return initial?.call(level);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(double currentTimer, bool isTrue)? giveNextQuestion,
+    TResult Function(int level)? initial,
+    TResult Function(double currentTimer, bool isTrue, int level)?
+        giveNextQuestion,
     TResult Function()? stop,
-    TResult Function()? restart,
+    TResult Function(int level)? restart,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial();
+      return initial(level);
     }
     return orElse();
   }
@@ -197,7 +227,12 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements PlayEvent {
-  const factory _Initial() = _$_Initial;
+  const factory _Initial(final int level) = _$_Initial;
+
+  int get level;
+  @JsonKey(ignore: true)
+  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -206,7 +241,7 @@ abstract class _$$_NextQuestionCopyWith<$Res> {
           _$_NextQuestion value, $Res Function(_$_NextQuestion) then) =
       __$$_NextQuestionCopyWithImpl<$Res>;
   @useResult
-  $Res call({double currentTimer, bool isTrue});
+  $Res call({double currentTimer, bool isTrue, int level});
 }
 
 /// @nodoc
@@ -222,6 +257,7 @@ class __$$_NextQuestionCopyWithImpl<$Res>
   $Res call({
     Object? currentTimer = null,
     Object? isTrue = null,
+    Object? level = null,
   }) {
     return _then(_$_NextQuestion(
       null == currentTimer
@@ -232,6 +268,10 @@ class __$$_NextQuestionCopyWithImpl<$Res>
           ? _value.isTrue
           : isTrue // ignore: cast_nullable_to_non_nullable
               as bool,
+      null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -239,16 +279,18 @@ class __$$_NextQuestionCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NextQuestion implements _NextQuestion {
-  const _$_NextQuestion(this.currentTimer, this.isTrue);
+  const _$_NextQuestion(this.currentTimer, this.isTrue, this.level);
 
   @override
   final double currentTimer;
   @override
   final bool isTrue;
+  @override
+  final int level;
 
   @override
   String toString() {
-    return 'PlayEvent.giveNextQuestion(currentTimer: $currentTimer, isTrue: $isTrue)';
+    return 'PlayEvent.giveNextQuestion(currentTimer: $currentTimer, isTrue: $isTrue, level: $level)';
   }
 
   @override
@@ -258,11 +300,12 @@ class _$_NextQuestion implements _NextQuestion {
             other is _$_NextQuestion &&
             (identical(other.currentTimer, currentTimer) ||
                 other.currentTimer == currentTimer) &&
-            (identical(other.isTrue, isTrue) || other.isTrue == isTrue));
+            (identical(other.isTrue, isTrue) || other.isTrue == isTrue) &&
+            (identical(other.level, level) || other.level == level));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentTimer, isTrue);
+  int get hashCode => Object.hash(runtimeType, currentTimer, isTrue, level);
 
   @JsonKey(ignore: true)
   @override
@@ -273,37 +316,39 @@ class _$_NextQuestion implements _NextQuestion {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(double currentTimer, bool isTrue)
+    required TResult Function(int level) initial,
+    required TResult Function(double currentTimer, bool isTrue, int level)
         giveNextQuestion,
     required TResult Function() stop,
-    required TResult Function() restart,
+    required TResult Function(int level) restart,
   }) {
-    return giveNextQuestion(currentTimer, isTrue);
+    return giveNextQuestion(currentTimer, isTrue, level);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(double currentTimer, bool isTrue)? giveNextQuestion,
+    TResult? Function(int level)? initial,
+    TResult? Function(double currentTimer, bool isTrue, int level)?
+        giveNextQuestion,
     TResult? Function()? stop,
-    TResult? Function()? restart,
+    TResult? Function(int level)? restart,
   }) {
-    return giveNextQuestion?.call(currentTimer, isTrue);
+    return giveNextQuestion?.call(currentTimer, isTrue, level);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(double currentTimer, bool isTrue)? giveNextQuestion,
+    TResult Function(int level)? initial,
+    TResult Function(double currentTimer, bool isTrue, int level)?
+        giveNextQuestion,
     TResult Function()? stop,
-    TResult Function()? restart,
+    TResult Function(int level)? restart,
     required TResult orElse(),
   }) {
     if (giveNextQuestion != null) {
-      return giveNextQuestion(currentTimer, isTrue);
+      return giveNextQuestion(currentTimer, isTrue, level);
     }
     return orElse();
   }
@@ -347,11 +392,13 @@ class _$_NextQuestion implements _NextQuestion {
 }
 
 abstract class _NextQuestion implements PlayEvent {
-  const factory _NextQuestion(final double currentTimer, final bool isTrue) =
+  const factory _NextQuestion(
+          final double currentTimer, final bool isTrue, final int level) =
       _$_NextQuestion;
 
   double get currentTimer;
   bool get isTrue;
+  int get level;
   @JsonKey(ignore: true)
   _$$_NextQuestionCopyWith<_$_NextQuestion> get copyWith =>
       throw _privateConstructorUsedError;
@@ -392,11 +439,11 @@ class _$_Stop implements _Stop {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(double currentTimer, bool isTrue)
+    required TResult Function(int level) initial,
+    required TResult Function(double currentTimer, bool isTrue, int level)
         giveNextQuestion,
     required TResult Function() stop,
-    required TResult Function() restart,
+    required TResult Function(int level) restart,
   }) {
     return stop();
   }
@@ -404,10 +451,11 @@ class _$_Stop implements _Stop {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(double currentTimer, bool isTrue)? giveNextQuestion,
+    TResult? Function(int level)? initial,
+    TResult? Function(double currentTimer, bool isTrue, int level)?
+        giveNextQuestion,
     TResult? Function()? stop,
-    TResult? Function()? restart,
+    TResult? Function(int level)? restart,
   }) {
     return stop?.call();
   }
@@ -415,10 +463,11 @@ class _$_Stop implements _Stop {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(double currentTimer, bool isTrue)? giveNextQuestion,
+    TResult Function(int level)? initial,
+    TResult Function(double currentTimer, bool isTrue, int level)?
+        giveNextQuestion,
     TResult Function()? stop,
-    TResult Function()? restart,
+    TResult Function(int level)? restart,
     required TResult orElse(),
   }) {
     if (stop != null) {
@@ -474,6 +523,8 @@ abstract class _$$_RestartCopyWith<$Res> {
   factory _$$_RestartCopyWith(
           _$_Restart value, $Res Function(_$_Restart) then) =
       __$$_RestartCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int level});
 }
 
 /// @nodoc
@@ -482,61 +533,87 @@ class __$$_RestartCopyWithImpl<$Res>
     implements _$$_RestartCopyWith<$Res> {
   __$$_RestartCopyWithImpl(_$_Restart _value, $Res Function(_$_Restart) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? level = null,
+  }) {
+    return _then(_$_Restart(
+      null == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Restart implements _Restart {
-  const _$_Restart();
+  const _$_Restart(this.level);
+
+  @override
+  final int level;
 
   @override
   String toString() {
-    return 'PlayEvent.restart()';
+    return 'PlayEvent.restart(level: $level)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Restart);
+        (other.runtimeType == runtimeType &&
+            other is _$_Restart &&
+            (identical(other.level, level) || other.level == level));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, level);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RestartCopyWith<_$_Restart> get copyWith =>
+      __$$_RestartCopyWithImpl<_$_Restart>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(double currentTimer, bool isTrue)
+    required TResult Function(int level) initial,
+    required TResult Function(double currentTimer, bool isTrue, int level)
         giveNextQuestion,
     required TResult Function() stop,
-    required TResult Function() restart,
+    required TResult Function(int level) restart,
   }) {
-    return restart();
+    return restart(level);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(double currentTimer, bool isTrue)? giveNextQuestion,
+    TResult? Function(int level)? initial,
+    TResult? Function(double currentTimer, bool isTrue, int level)?
+        giveNextQuestion,
     TResult? Function()? stop,
-    TResult? Function()? restart,
+    TResult? Function(int level)? restart,
   }) {
-    return restart?.call();
+    return restart?.call(level);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(double currentTimer, bool isTrue)? giveNextQuestion,
+    TResult Function(int level)? initial,
+    TResult Function(double currentTimer, bool isTrue, int level)?
+        giveNextQuestion,
     TResult Function()? stop,
-    TResult Function()? restart,
+    TResult Function(int level)? restart,
     required TResult orElse(),
   }) {
     if (restart != null) {
-      return restart();
+      return restart(level);
     }
     return orElse();
   }
@@ -580,7 +657,12 @@ class _$_Restart implements _Restart {
 }
 
 abstract class _Restart implements PlayEvent {
-  const factory _Restart() = _$_Restart;
+  const factory _Restart(final int level) = _$_Restart;
+
+  int get level;
+  @JsonKey(ignore: true)
+  _$$_RestartCopyWith<_$_Restart> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

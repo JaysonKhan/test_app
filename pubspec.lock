@@ -416,6 +416,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  metaballs:
+    dependency: "direct main"
+    description:
+      name: metaballs
+      sha256: "0a3c11cd8e094c78a5d541c442fe40baf4c01113cd0c3e0e1704d0f9da44b4c8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.0"
   mime:
     dependency: transitive
     description:
@@ -456,6 +464,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.9"
+  particles_fly:
+    dependency: "direct main"
+    description:
+      name: particles_fly
+      sha256: "77a0eb6e8423724438505f66e1534e3ba3e055cf9be784f22dce6fd142afc428"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.8"
   path:
     dependency: transitive
     description:
